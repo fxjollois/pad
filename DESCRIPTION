@@ -1,0 +1,13 @@
+Package: pad
+Type: Package
+Title: Point Anomaly Detection in univariate time-serie
+Version: 0.1
+Date: en cours
+Author: F.-X. Jollois
+Maintainer: F.-X. Jollois <francois-xavier.jollois@parisdescartes.fr>
+Description: This package allows you to detect point anomalies in a univariate time serie, with different methods.
+License: GPL
+LazyData: TRUE
+Depends: zoo
+Suggests: knitr
+VignetteBuilder: knitr

@@ -1,0 +1,78 @@
+---
+title: "Point Anomaly Detection"
+author: "F.-X. Jollois"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{pad}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+bibliography: pad.bib
+---
+
+```{r echo=FALSE, results='hide'}
+# For automatic figures and tables numbering and referencing
+library(captioner)
+table_nums <- captioner(prefix = "Table")
+figure_nums <- captioner(prefix = "Figure")
+captionfig <- function(fig) { 
+  cap = figure_nums(fig)
+  return (sub("(Figure[ ]+[0-9]+)", "**\\1**", cap))}
+citefig <- function(fig) { return (figure_nums(fig, display = "cite"))}
+figure_nums(name = "pointSample", 
+            caption ="Univariate time serie, with an outlier (in red circle)")
+```
+
+# Point Anomaly
+
+The purpose of the `pad` package is to propose a large method to detect point anomalies in a univariate time-serie. A point anomaly is a particular element, far enough to its neighborhood to be considered as an outlier, as shown in `r citefig("pointSample")`. 
+
+```{r echo = FALSE, fig.width=5, fig.cap=captionfig("pointSample")}
+x = runif(100)
+x[50] = 3
+opar <- par(mar = c(2, 2, 2, 0) + 0.1)
+plot(x, type = "l", 
+     xlab = "time", ylab = "value")
+points(50, x[50], col = "red", cex = 2)
+par(opar)
+```
+
+@gupta2014outlier [chap. 2.2.1] propose an interesting survey of methodologies to find outlier points for a time series. They define three different kind of methods:
+
+> - **Prediction Models**: The outlier score for a point in the time series is computed as its deviation from the predicted value by a summary prediction model. The primary variation across models, is in terms of the particular prediction model used.
+> - **Profile Similarity-Based Approaches**: These approaches maintain a normal profile and then compare a new time point against this profile to decide whether it is an outlier. 
+> - **Deviants**: Deviants are outlier points in time series from a minimum description length (MDL) point of view.
+
+## Notation
+
+Given $t = (t_i)$ an univariate time serie, with $i = 1, \ldots, n$.
+
+
+# Detection methods
+
+
+## Standard Deviation
+
+A point $i$ is considered as an anomaly if $t_i$ is outside the interval $[ \mu - \alpha * \sigma ; \mu + \alpha * sigma ]$.
+
+## Extreme Studentized Deviate
+
+Also called ESD [@ESD], reference to put here -- in a simplified version 
+
+
+# Prediction Models
+
+## Sliding window median (`SWMed`)
+
+In @Basu2007, the authors want to suppress outliers in an univariate time serie. For that, they propose a simple method based on sliding window and median deviation. A point $i$ is considered as an anomaly if
+$$
+    | t_i - m_i | < \varepsilon
+$$
+where $\varepsilon$ is a given threshold and $m_i$ is the median computed from the neighborhood of $i$, determined with two methods ($k$ is a given size):
+
+- *two-sided*: $m_i = median( t_{i - k}, \ldots, t_{i + k})$
+- *one-sided*: $m_i = median( t_{i - 2k}, \ldots, t_{i - 1})$
+
+# References
