@@ -5,9 +5,13 @@ Version: 0.1
 Date: en cours
 Author: F.-X. Jollois
 Maintainer: F.-X. Jollois <francois-xavier.jollois@parisdescartes.fr>
-Description: This package allows you to detect point anomalies in a univariate time serie, with different methods.
+Description: This package allows you to detect point anomalies in a univariate
+    time serie, with different methods.
 License: GPL
 LazyData: TRUE
-Depends: zoo
-Suggests: knitr
+Depends:
+    zoo
+Suggests:
+    knitr
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

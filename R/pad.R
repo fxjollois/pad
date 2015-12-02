@@ -1,13 +1,20 @@
-# Detection functionnalities
-#
-# INPUT
-#   ts: univariate time-serie
-#   method: method to use to detect anomalies
-#   ...: parameters for the specified method
-# OUTPUT
-#   list of class "pad", including two vectors :
-#     ts: original time-serie
-#     anomalies: estimated anomalies (indexes)
+#' Point Anomaly Detection
+#' 
+#' The \code{pad} function propose a wide range of methods to detect 
+#' point anomalies in a univariate time-serie.
+#'
+#' @param ts An univariate time series
+#' @param method Name of the desired method
+#' @param ... Parameters for the specified method (see specific help for more details)
+#' 
+#' @return list of class \code{pad}, including two vectors :
+#'   \item{\code{ts}}{original time series}
+#'   \item{\code{anomalies}}{estimated anomalies (indexes)}
+#' 
+#' @export
+
+# @example 
+# pad(x$ts, "sw.median")
 
 pad <- function (ts, method, ...) {
   ano = NULL
@@ -17,7 +24,7 @@ pad <- function (ts, method, ...) {
   if (!is.numeric(ts)) {
     stop("ts must be numeric.")
   }
-  methods = c("ESD", "SD", "SWMed")
+  methods = c("esd", "sd", "sw.median")
   if (is.na(match(method, methods))) {
     stop("Wrong method name.")
   }

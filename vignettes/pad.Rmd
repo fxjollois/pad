@@ -27,7 +27,7 @@ figure_nums(name = "pointSample",
 
 # Point Anomaly
 
-The purpose of the `pad` package is to propose a large method to detect point anomalies in a univariate time-serie. A point anomaly is a particular element, far enough to its neighborhood to be considered as an outlier, as shown in `r citefig("pointSample")`. 
+The purpose of the `pad` package is to propose a large range of methods to detect point anomalies in a univariate time-serie. A point anomaly is a particular element, far enough to its neighborhood to be considered as an outlier, as shown in `r citefig("pointSample")`. 
 
 ```{r echo = FALSE, fig.width=5, fig.cap=captionfig("pointSample")}
 x = runif(100)

@@ -1,17 +1,25 @@
-# sliding window median (from Busa and Meckesheimer, 2007)
-#
-# a value t_i is considered as an anomaly if abs(t_i - m_i) > threshold, where m_i
-# is the median of the neighborhood of i defined with the following :
-#   two-sided: m_i = median(t_(i-k), ..., t_(i+k))   -> t_i is inside
-#   one-sided: m_i = median(t_(i-2k), ..., t_(i-1))  -> t_i is outside
-#
-# INPUT
-#   ts: univariate time-serie
-#   alpha: parameter
-# OUTPUT
-#   list of estimated anomalies (indexes)
+#' Point anomaly detection using sliding window median
+#'
+#' a value $t_i$ is considered as an anomaly if \eqn{abs(t_i - m_i) > threshold}, where \eqn{m_i}
+#' is the median of the neighborhood of \eqn{i} defined with the following (where \eqn{k = size}):
+#' \describe{
+#'   \item{\code{two-sided}}{\eqn{m_i = median(t_(i-k), ..., t_(i+k))}, then \eqn{t_i} is inside}
+#'   \item{\code{one-sided}}{\eqn{m_i = median(t_(i-2k), ..., t_(i-1))}, then \eqn{t_i} is outside}
+#' }
+#'
+#' @param ts An univariate time series
+#' @param side Choose between \code{one-sided} or \code{two-sided}
+#' @param size Size of the sliding window
+#' @param threshold 
+#' 
+#' @return Vector of estimated anomalies (indexes)
+#' 
+#' @seealso \code{\link{pad}}
+#' 
+#' @references
+#'   % bibentry: Basu2007
 
-pad.SWMed <- function (ts, side = "one-sided", size = 10, threshold = 1) {
+pad.sw.median <- function (ts, side = "one-sided", size = 10, threshold = 1) {
   if (threshold <= 0) {
     stop("Threshold must be positive.")
   }
