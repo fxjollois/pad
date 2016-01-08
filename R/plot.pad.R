@@ -1,3 +1,6 @@
+#' Plotting pad object
+#' 
+#' @param pad object of class \code{pad}
 # usefulll functionnalities
 
 plot.pad <- function (pad) {
